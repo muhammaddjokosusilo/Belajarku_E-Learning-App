@@ -1,6 +1,8 @@
 import { Image } from 'expo-image';
 import { Platform, StyleSheet } from 'react-native';
+import { useRouter } from 'expo-router';
 
+import Button from '@/components/ui/Button';
 import { HelloWave } from '@/components/hello-wave';
 import ParallaxScrollView from '@/components/parallax-scroll-view';
 import { ThemedText } from '@/components/themed-text';
@@ -64,6 +66,26 @@ export default function HomeScreen() {
           {`Tap the Explore tab to learn more about what's included in this starter app.`}
         </ThemedText>
       </ThemedView>
+
+      {/* Tombol untuk ke explore */}
+      <ThemedView style={styles.stepContainer}>
+        <Link href="/explore" style={styles.exploreLink}>
+          <Link.Trigger>
+            <ThemedText type="subtitle" style={styles.exploreButton}>
+              Buka Explore
+            </ThemedText>
+          </Link.Trigger>
+          <Link.Preview />
+        </Link>
+      </ThemedView>
+
+      {/* Button Login */}
+      <ThemedView style={styles.stepContainer}>
+        <Link href="/auth/login" asChild>
+          <Button title="Ke Login" style={{ alignSelf: 'flex-start' }} />
+        </Link>
+      </ThemedView>
+
       <ThemedView style={styles.stepContainer}>
         <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
         <ThemedText>
@@ -94,5 +116,18 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     position: 'absolute',
+  },
+  exploreButton: {
+    backgroundColor: '#007bff',
+    color: '#fff',
+    paddingVertical: 10,
+    paddingHorizontal: 14,
+    borderRadius: 8,
+    overflow: 'hidden',
+    alignSelf: 'flex-start',
+  },
+  exploreLink: {
+    alignSelf: 'flex-start', // mencegah link mengisi lebar parent
+    // width: 'auto' // opsional
   },
 });
