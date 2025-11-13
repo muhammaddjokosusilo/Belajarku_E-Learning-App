@@ -64,7 +64,7 @@ export default function LoginScreen() {
 
                     {/* Button Login */}
                     <View style={styles.button}>
-                      <Link href="/" asChild>
+                      <Link href="/Dashboard" asChild>
                         <Button title="Login" style={{ alignSelf: 'flex-start' }} />
                       </Link>
                     </View>
