@@ -180,6 +180,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { useRouter } from 'expo-router';
+import NavbarBottom from '@/components/ui/navbar_bottom';
 
 const { width } = Dimensions.get('window');
 
@@ -254,6 +255,12 @@ export default function LoginScreen() {
             </View>
 
             {/* Info section End */}
+            {/* Bottom Navbar */}
+            <NavbarBottom
+              items={[
+                { icon: require('../../../assets/icon/Home.png'), route: '../auth/login' },
+              ]}
+            />
         </View>
     </SafeAreaView>
   );
