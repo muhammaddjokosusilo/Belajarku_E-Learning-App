@@ -10,15 +10,15 @@ type Props = {
   onPress?: () => void;
 };
 
-export default function CardMateri({ titleCard, subject, onPress }: Props) {
+export default function CardMateri({ titleCard, color, subject, onPress }: Props) {
   return (
-    <View style={styles.card}>
-        <View>
+    <View style={[styles.card, { backgroundColor: color }]}>
+        <View style={{ alignItems: 'flex-start', width: '100%' }}>
             <Text style={styles.title}>{titleCard}</Text>
             <Text style={styles.subject}>{subject}</Text>
         </View>
 
-        <View>
+        <View style={ styles.button }>
             <Button 
                 title="Buka PDF" 
                 onPress={onPress}
@@ -32,7 +32,6 @@ const styles = StyleSheet.create({
   card: {
     width: 338,
     height: 204,
-    backgroundColor: color, // merah lembut
     borderRadius: 16,
     padding: 16,
     justifyContent: 'space-between',
@@ -40,8 +39,9 @@ const styles = StyleSheet.create({
   },
   title: {
     color: '#fff',
-    fontSize: 18,
-    fontWeight: '600',
+    fontSize: 28,
+    fontFamily: 'poppins-regular',
+    fontWeight: '300',
     marginBottom: 4,
   },
   subject: {
@@ -50,10 +50,10 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   button: {
-    backgroundColor: '#1ABC63', // hijau tombol
-    borderRadius: 20,
+    width: '80%',// hijau tombol
+    borderRadius: 0,
     paddingVertical: 6,
-    paddingHorizontal: 24,
+    paddingHorizontal: 10,
     marginTop: 16,
   },
   buttonText: {

@@ -202,7 +202,8 @@ const styles = StyleSheet.create({
     color: '#7D7D7D',
     fontSize: 11,
     textAlign: 'center',
-    textWrap: 'wrap',
+    flexWrap: 'wrap',
+    
   },
 
   infoTitle: {
