@@ -11,7 +11,6 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import { Link } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-import CarSubContent from '@/components/ui/cardSubContent';
 import NavbarBottom from '@/components/ui/navbar_bottom';
 import CardSubContent from '@/components/ui/cardSubContent';
 
@@ -64,10 +63,10 @@ export default function MathematicsScreen() {
                     <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
                     <Ionicons name="arrow-back" size={22} color="#fff" />
                     </TouchableOpacity>
-                    <Text style={styles.headerTitle}>Level Education</Text>
+                    <Text style={styles.headerTitle}>Matematika SD</Text>
                 </View>
 
-                {/* Daftar Pilihan Level */}
+                {/* Daftar Pilihan Materi*/}
                 <View style={styles.cardListContainer}>
                     {levelEdu.map((item, index) => (
                     <Link href={linkTarget[index]} asChild>

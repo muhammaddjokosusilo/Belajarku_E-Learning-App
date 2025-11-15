@@ -15,8 +15,8 @@ import NavbarBottom from '@/components/ui/navbar_bottom';
 const { width } = Dimensions.get('window');
 
 const subjects = [
-  { id: 'mat', title: 'Matematika', photo: require('@/assets/images/mat.png') },
-  { id: 'idn', title: 'Bahasa Indonesia', photo: require('@/assets/images/idn.png') },
+  { id: 'mat', title: 'Matematika', photo: require('../../../assets/images/mat.png') },
+  { id: 'idn', title: 'Bahasa Indonesia', photo: require('../../../assets/images/idn.png') },
   { id: 'eng', title: 'Bahasa Inggris' },
   { id: 'sci', title: 'Fisika' },
   { id: 'eco', title: 'Ilmu Ekonomi' },
@@ -59,7 +59,7 @@ export default function LoginScreen() {
                   <View style={[styles.iconBox, { backgroundColor: '#fff'}]}>
                     <View style={{width: 73, height: '70%', borderRadius: 12, alignItems: 'center', justifyContent: 'center'}}>
                         <Image 
-                          source={require('@/assets/images/mat.png')}
+                          source={s.photo || require('../../../assets/images/mat.png')}
                         />
                     </View>  
                     <Text style={styles.iconLabel} numberOfLines={1}>
@@ -202,8 +202,8 @@ const styles = StyleSheet.create({
     color: '#7D7D7D',
     fontSize: 11,
     textAlign: 'center',
-    flexWrap: 'wrap',
-    
+    justifyContent: 'center',
+    textWrap: 'wrap',
   },
 
   infoTitle: {

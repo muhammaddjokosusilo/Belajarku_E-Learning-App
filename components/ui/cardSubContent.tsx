@@ -14,15 +14,17 @@ const { width } = Dimensions.get('window');
 type Props = {
   title: string;
   onPress?: () => void;
+  bgColor?: string;
+  color?: string;
 };
 
-export default function CardSubContent({ title, onPress }: Props) {
+export default function CardSubContent({ title, onPress, bgColor, color }: Props) {
   return (
-    <TouchableOpacity style={styles.card} onPress={onPress}>
-        <Text style={styles.cardText}>{title}</Text>
+    <TouchableOpacity style={[styles.card, { backgroundColor: bgColor }]} onPress={onPress}>
+        <Text style={[styles.cardText, { color: color }]}>{title}</Text>
         <View>
         {/* Menggunakan ikon panah sederhana, ganti dengan aset panah Anda */}
-        <Text style={styles.arrowIcon}>{'>'}</Text>
+        <Text style={[styles.arrowIcon, { color: color }]}>{'>'}</Text>
         </View>
     </TouchableOpacity>
 )};
