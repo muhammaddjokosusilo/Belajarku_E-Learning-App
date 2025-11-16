@@ -3,14 +3,13 @@ import {
   SafeAreaView,
   View,
   StyleSheet,
-  Image,
   Text, 
   Dimensions,
   TouchableOpacity,
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { Link } from 'expo-router';
+
 import { Ionicons } from '@expo/vector-icons';
+import { useRouter } from "expo-router";
 import CardLevelEdu from '@/components/ui/cardLevelEdu';
 import NavbarBottom from '@/components/ui/navbar_bottom';
 
@@ -18,60 +17,54 @@ const { width } = Dimensions.get('window');
 
 // --- Halaman Utama ---
 export default function MathematicsScreen() {
-    const navigation = useNavigation();
+    const router = useRouter();
     const levelEdu = [
     { 
       id: 1, 
       level: "SD", 
-      imageSource: require('../../../assets/images/sd.png'),  
+      imageSource: require('../../../assets/images/sd.png'),
+      route: "/mainContent/materiSD",  
     },
     { 
       id: 2, 
       level: "SMP", 
       imageSource: require('../../../assets/images/smp.png'), 
+      route: "/mainContent/materiSD",
     },
     { 
       id: 3, 
       level: "SMA", 
       imageSource: require('../../../assets/images/sma.png'),  
+      route: "/mainContent/materiSD",
     },
     ];
-
-    const linkTarget = [
-      '/mainContent/contentSD',
-      '/Dashboard',
-      '/Dashboard',
-    ] as const;
 
     return (
         <SafeAreaView style={styles.screen}>
             <View style={styles.container}>
                 {/* Header dengan tombol kembali dan judul */}
                 <View style={styles.header}>
-                    <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
+                    <TouchableOpacity onPress={() => router.push("/Dashboard")} style={styles.backButton}>
                     <Ionicons name="arrow-back" size={22} color="#fff" />
                     </TouchableOpacity>
-                    <Text style={styles.headerTitle}>SD</Text>
+                    <Text style={styles.headerTitle}>Level Education</Text>
                 </View>
 
                 {/* Daftar Pilihan Level */}
                 <View style={styles.cardListContainer}>
-                    {levelEdu.map((item, index) => (
-                    <Link href={linkTarget[index]} asChild>
+                    {levelEdu.map((item) => (
                         <View style={{ marginBottom: 20 }} key={item.id}>
                             <CardLevelEdu
                             level={item.level}
                             imageSource={item.imageSource}
+                            route={item.route}
                             />
                         </View>
-                    </Link>
                     ))}
                 </View>
                 
                 <NavbarBottom
-                    items={[
-                        { icon: require('../../../assets/icon/Home.png'), route: '../auth/login' },
-                    ]}
+                    activeRoute={0}
                 />
                
             </View>

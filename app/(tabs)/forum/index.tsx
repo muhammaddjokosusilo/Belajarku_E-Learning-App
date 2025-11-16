@@ -3,14 +3,12 @@ import {
   SafeAreaView,
   View,
   StyleSheet,
-  Image,
-  TextInput,
   Text, 
   Dimensions,
   TouchableOpacity,
-    ScrollView,
+  ScrollView,
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 
 
@@ -22,7 +20,7 @@ import ReplyInputBox from '@/components/forum/replyInputBox';
 const { width } = Dimensions.get('window');
 
 export default function ForumScreen() {
-    const navigation = useNavigation();
+    const router = useRouter();
 
     const forumData = [
         {
@@ -102,10 +100,10 @@ export default function ForumScreen() {
 
                 {/* Header Back */}
                 <View style={styles.header}>
-                    <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
-                    <Ionicons name="arrow-back" size={22} color="#fff" />
+                    <TouchableOpacity onPress={() => router.push("/Dashboard")} style={styles.backButton}>
+                        <Ionicons name="arrow-back" size={22} color="#fff" />
                     </TouchableOpacity>
-                    <Text style={styles.headerTitle}>Forum</Text>
+                    <Text style={styles.headerTitle}>SD</Text>
                 </View>
 
                 <ScrollView contentContainerStyle={styles.scroll}>
@@ -146,17 +144,12 @@ export default function ForumScreen() {
                 </ScrollView>
 
                 {/* ADD BUTTON */}
-                <TouchableOpacity style={styles.addButton}>
-                    <Image
-                    source={require("../../../assets/icon/Home.png")}
-                    style={{ width: 40, height: 40 }}
-                    />
+                <TouchableOpacity style={styles.addButton} onPress={() => router.push("/forum/addChat")}>
+                    <Ionicons name="add-outline" size={30} color={'#27AE60'} />
                 </TouchableOpacity>
                 {/* Navbar Bottom */}
                 <NavbarBottom
-                items={[
-                    { icon: require('../../../assets/icon/Home.png'), route: '../auth/login' },
-                ]}
+                    activeRoute={3}
                 />
             </View>
         </SafeAreaView>

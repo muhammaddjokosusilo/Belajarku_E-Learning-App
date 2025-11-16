@@ -3,8 +3,6 @@ import {
   SafeAreaView,
   View,
   StyleSheet,
-  Image,
-  TextInput,
   Text, 
   Dimensions,
   ScrollView,
@@ -12,11 +10,11 @@ import {
 } from 'react-native';
 const { width } = Dimensions.get('window');
 import NavbarBottom from '@/components/ui/navbar_bottom';
-import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
 
 export default function TemplateScreen() {
-const navigation = useNavigation();
+const router = useRouter();
 const quizData = {
     question: "Rumus keliling lingkaran adalah...",
     options: [
@@ -38,10 +36,10 @@ return (
         <View style={styles.container}>
             {/* Header Back */}
             <View style={styles.header}>
-                <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
+                <TouchableOpacity onPress={() => router.push("/mainContent/isiMateri")} style={styles.backButton}>
                 <Ionicons name="arrow-back" size={22} color="#fff" />
                 </TouchableOpacity>
-                <Text style={styles.headerTitle}>Bangun Ruang</Text>
+                <Text style={styles.headerTitle}>SD</Text>
             </View>
 
             {/* Quiz */}
@@ -77,9 +75,7 @@ return (
 
             {/* Navbar Bottom */}
             <NavbarBottom
-              items={[
-                { icon: require('../../../assets/icon/Home.png'), route: '../auth/login' },
-              ]}
+                activeRoute={0}
             />
         </View>
     </SafeAreaView>

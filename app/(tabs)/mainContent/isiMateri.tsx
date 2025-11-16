@@ -3,29 +3,27 @@ import {
   SafeAreaView,
   View,
   StyleSheet,
-  Image,
-  TextInput,
   Text, 
   Dimensions,
   TouchableOpacity,
 } from 'react-native';
 const { width } = Dimensions.get('window');
-import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
 import NavbarBottom from '@/components/ui/navbar_bottom';
 
 export default function TemplateScreen() {
-    const navigation = useNavigation();
+    const router = useRouter();
 return (
     <SafeAreaView style={styles.screen}>
         <View style={styles.container}>
 
             {/* Header Back */}
             <View style={styles.header}>
-                <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
+                <TouchableOpacity onPress={() => router.push("/mainContent/subMateri")} style={styles.backButton}>
                 <Ionicons name="arrow-back" size={22} color="#fff" />
                 </TouchableOpacity>
-                <Text style={styles.headerTitle}>Bangun Ruang</Text>
+                <Text style={styles.headerTitle}>SD</Text>
             </View>
 
             {/* Content */}
@@ -49,9 +47,7 @@ return (
 
             {/* Navbar Bottom */}
             <NavbarBottom
-              items={[
-                { icon: require('../../../assets/icon/Home.png'), route: '../auth/login' },
-              ]}
+                activeRoute={0}
             />
         </View>
     </SafeAreaView>

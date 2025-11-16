@@ -8,19 +8,20 @@ import {
   Dimensions,
   TouchableOpacity,
 } from 'react-native';
-
+import { useRouter } from "expo-router";
 const { width } = Dimensions.get('window');
 
 type Props = {
   title: string;
-  onPress?: () => void;
+  route: string;
   bgColor?: string;
   color?: string;
 };
 
-export default function CardSubContent({ title, onPress, bgColor, color }: Props) {
+export default function CardSubContent({ title, route, bgColor, color }: Props) {
+  const router = useRouter();
   return (
-    <TouchableOpacity style={[styles.card, { backgroundColor: bgColor }]} onPress={onPress}>
+    <TouchableOpacity style={[styles.card, { backgroundColor: bgColor }]} onPress={() => router.push(route)}>
         <Text style={[styles.cardText, { color: color }]}>{title}</Text>
         <View>
         {/* Menggunakan ikon panah sederhana, ganti dengan aset panah Anda */}

@@ -8,18 +8,20 @@ import {
   Dimensions,
   TouchableOpacity,
 } from 'react-native';
-
+import { useRouter } from "expo-router";
 const { width } = Dimensions.get('window');
 
 type Props = {
   level: string;
   imageSource: any;
-  onPress?: () => void;
+  route: string
 };
 
-export default function CardLevelEdu({ level, imageSource, onPress }: Props) {
+export default function CardLevelEdu({ level, imageSource, route }: Props) {
+  const router = useRouter();
   return (
-    <TouchableOpacity style={styles.card} onPress={onPress}>
+
+    <TouchableOpacity style={styles.card} onPress={() => router.push(route)}>
         <Image source={imageSource} style={styles.cardImage} resizeMode="contain" />
         <Text style={styles.cardText}>{level}</Text>
         <View style={styles.arrowContainer}>

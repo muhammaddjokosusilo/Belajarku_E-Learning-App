@@ -3,86 +3,78 @@ import {
   SafeAreaView,
   View,
   StyleSheet,
-  Image,
   Text, 
   Dimensions,
   TouchableOpacity,
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { Link } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import NavbarBottom from '@/components/ui/navbar_bottom';
 import CardSubContent from '@/components/ui/cardSubContent';
+import { useRouter } from "expo-router";
 
 const { width } = Dimensions.get('window');
 
 // --- Halaman Utama ---
 export default function MathematicsScreen() {
-    const navigation = useNavigation();
+    const router = useRouter();
     const levelEdu = [
     { 
       id: 1, 
       title: "Aljabar",  
+      route: "/mainContent/subMateri",
     },
     { 
       id: 2, 
       title: "Himpunan", 
+      route: "/mainContent/subMateri",
     },
     { 
       id: 3, 
       title: "Pola Bilangan",   
+      route: "/mainContent/subMateri",
     },
     { 
       id: 4, 
       title: "Fungsi",   
+      route: "/mainContent/subMateri",
     },
     { 
       id: 5, 
       title: "SPLTV",   
+      route: "/mainContent/subMateri",
     },
     { 
       id: 6, 
       title: "Statistika",   
+      route: "/mainContent/subMateri",
     }
     ];
-
-    const linkTarget = [
-      '/Dashboard',
-      '/Dashboard',
-      '/Dashboard',
-      '/Dashboard',
-      '/Dashboard',
-      '/Dashboard',
-    ] as const;
 
     return (
         <SafeAreaView style={styles.screen}>
             <View style={styles.container}>
                 {/* Header dengan tombol kembali dan judul */}
                 <View style={styles.header}>
-                    <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
+                    <TouchableOpacity onPress={() => router.push("/mainContent/levelEdu")} style={styles.backButton}>
                     <Ionicons name="arrow-back" size={22} color="#fff" />
                     </TouchableOpacity>
-                    <Text style={styles.headerTitle}>Matematika SD</Text>
+                    <Text style={styles.headerTitle}>SD</Text>
                 </View>
 
                 {/* Daftar Pilihan Materi*/}
                 <View style={styles.cardListContainer}>
-                    {levelEdu.map((item, index) => (
-                    <Link href={linkTarget[index]} asChild>
-                        <View style={{ marginBottom: 20 }} key={item.id}>
-                            <CardSubContent
+                    {levelEdu.map((item) => (
+                    <View style={{ marginBottom: 20 }} key={item.id}>
+                        <CardSubContent
                             title={item.title}
-                            />
-                        </View>
-                    </Link>
+                            route={item.route}
+                        />
+                    </View>
                     ))}
                 </View>
                 
                 <NavbarBottom
-                    items={[
-                        { icon: require('../../../assets/icon/Home.png'), route: '../auth/login' },
-                    ]}
+                    activeRoute={0}
                 />
                
             </View>

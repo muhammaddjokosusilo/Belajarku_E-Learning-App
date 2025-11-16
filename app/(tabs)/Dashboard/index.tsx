@@ -9,24 +9,34 @@ import {
   Dimensions,
   TouchableOpacity,
 } from 'react-native';
-import { useRouter } from 'expo-router';
 import NavbarBottom from '@/components/ui/navbar_bottom';
+import GridItem from '@/components/ui/gridItem';
+import { router } from 'expo-router';
 
 const { width } = Dimensions.get('window');
 
 const subjects = [
-  { id: 'mat', title: 'Matematika', photo: require('../../../assets/images/mat.png') },
-  { id: 'idn', title: 'Bahasa Indonesia', photo: require('../../../assets/images/idn.png') },
-  { id: 'eng', title: 'Bahasa Inggris' },
-  { id: 'sci', title: 'Fisika' },
-  { id: 'eco', title: 'Ilmu Ekonomi' },
-  { id: 'hist', title: 'Sejarah' },
-  { id: 'bio', title: 'Biologi' },
-  { id: 'chem', title: 'Kimia' },
+  {
+    id: 1,
+    title: "Matematika",
+    photo: require("../../../assets/images/mat.png"),
+    route: "/mainContent/levelEdu",
+  },
+  {
+    id: 2,
+    title: "Fisika",
+    // photo: require("../../../assets/images/fisika.png"),
+    route: "/mainContent/levelEdu",
+  },
+  {
+    id: 3,
+    title: "Biologi",
+    // photo: require("../../../assets/images/bio.png"),
+    route: "/mainContent/levelEdu",
+  },
 ];
 
-export default function LoginScreen() {
-    const router = useRouter();
+export default function DashboardScreen() {
     const [search, setSearch] = useState('');
   return (
     <SafeAreaView style={styles.screen}>
@@ -38,6 +48,7 @@ export default function LoginScreen() {
                         <Text style={styles.greeting}>Hi, Marsel!</Text>
                         <View style={styles.searchBox}>
                           <TextInput
+                            style={styles.input}
                             placeholder="🔍  Kamu mau belajar apa hari ini ?"
                             placeholderTextColor="#ffffffcc"
                             value={search}
@@ -55,18 +66,13 @@ export default function LoginScreen() {
             {/* Subjects grid */}
             <View style={styles.gridWrapper}>
               {subjects.map((s) => (
-                <TouchableOpacity key={s.id} style={styles.gridItem}>
-                  <View style={[styles.iconBox, { backgroundColor: '#fff'}]}>
-                    <View style={{width: 73, height: '70%', borderRadius: 12, alignItems: 'center', justifyContent: 'center'}}>
-                        <Image 
-                          source={s.photo || require('../../../assets/images/mat.png')}
-                        />
-                    </View>  
-                    <Text style={styles.iconLabel} numberOfLines={1}>
-                      {s.title}
-                    </Text>
-                  </View>
-                </TouchableOpacity>
+                <GridItem
+                  key={s.id}
+                  image={s.photo || require('../../../assets/images/mat.png')}
+                  title={s.title}
+                  route={s.route}   // bebas mau diarahkan ke mana
+                  styles={styles}            // supaya style tetap utuh
+                />
               ))}
             </View>
             {/* Subjects grid End */}
@@ -74,25 +80,22 @@ export default function LoginScreen() {
             {/* Info section */}
             <Text style={styles.infoTitle}>Belajarku info</Text>
             <View style={styles.infoSection}>
-              <View style={styles.banner}>
-                <Image 
-                  source={require('@/assets/images/event1.png')}
-                  style={{width: '100%', height: '100%',}}
-                  resizeMode="stretch"
-                />
+              <TouchableOpacity onPress={() => router.push('/Dashboard')} style={{ width: '100%', height: '100%', justifyContent: 'center', alignItems: 'center' }}>
+                <View style={styles.banner}>
+                  <Image 
+                    source={require('@/assets/images/event1.png')}
+                    style={{width: '100%', height: '100%',}}
+                    resizeMode="stretch"
+                  />
+                </View>
+                <Text style={{marginTop: 6,}}>Event Tahunan </Text>  
+                </TouchableOpacity>
               </View>
-              <Text style={{marginTop: 6,}}>Event Tahunan </Text>
-            </View>
 
             {/* Info section End */}
             {/* Bottom Navbar */}
             <NavbarBottom
-              items={[
-                { icon: require('../../../assets/icon/Home.png'), route: '../auth/login' },
-                { icon: require('../../../assets/icon/Home.png'), route: '../auth/login' },
-                { icon: require('../../../assets/icon/Home.png'), route: '../auth/login' },
-                { icon: require('../../../assets/icon/Home.png'), route: '../auth/login' },
-              ]}
+              activeRoute={1}
             />
         </View>
     </SafeAreaView>
@@ -161,6 +164,14 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 12,
     borderRadius: 20,
+  },
+  input: {
+    height: 44,
+    paddingHorizontal: 16,
+    borderColor: 'transparent',
+    color: '#fff',
+    fontSize: 20,
+    outlineWidth: 0,
   },
   searchPlaceholder: {
     color: '#ffffffcc',

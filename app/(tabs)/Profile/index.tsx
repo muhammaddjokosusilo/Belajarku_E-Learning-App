@@ -119,9 +119,7 @@ export default function ProfileScreen() {
 
                 {/* Navbar Bottom */}
                 <NavbarBottom
-                items={[
-                    { icon: require('../../../assets/icon/Home.png'), route: '../auth/login' },
-                ]}
+                    activeRoute={4}
                 />
                 {/* Navbar Bottom End */}
             </View>

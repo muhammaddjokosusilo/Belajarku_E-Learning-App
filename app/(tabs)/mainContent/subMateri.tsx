@@ -11,9 +11,8 @@ import {
   Alert,
   TouchableOpacity,
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
-import { Link } from 'expo-router';
+import { useRouter } from 'expo-router';
 import NavbarBottom from '@/components/ui/navbar_bottom';
 import YoutubePlayer from "react-native-youtube-iframe";
 import CardSubContent from '@/components/ui/cardSubContent';
@@ -22,32 +21,29 @@ const { width } = Dimensions.get('window');
 
 export default function LoginScreen() {
 
-    const navigation = useNavigation();
+    const router = useRouter()
     const levelEdu = [
     { 
       id: 1, 
       title: "Rumus Keliling",  
+      route: "/mainContent/isiMateri",
     },
     { 
       id: 2, 
       title: "Rumus Lingkaran", 
+      route: "/mainContent/isiMateri",
     },
     { 
       id: 3, 
       title: "Download PDF",   
+      route: "/mainContent/isiMateri",
     },
     { 
       id: 4, 
       title: "Quiz",   
+      route: "/mainContent/isiMateri",
     }
     ];
-
-    const linkTarget = [
-      '/Dashboard',
-      '/Dashboard',
-      '/Dashboard',
-      '/Dashboard',
-    ] as const;
 
     const [playing, setPlaying] = useState(false);
 
@@ -62,11 +58,12 @@ export default function LoginScreen() {
         <SafeAreaView style={styles.screen}>
             <View style={styles.container}>
                  {/* Header dengan tombol kembali dan judul */}
+                {/* Header dengan tombol kembali dan judul */}
                 <View style={styles.header}>
-                    <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
+                    <TouchableOpacity onPress={() => router.push("/mainContent/materiSD")} style={styles.backButton}>
                     <Ionicons name="arrow-back" size={22} color="#fff" />
                     </TouchableOpacity>
-                    <Text style={styles.headerTitle}>Level Education</Text>
+                    <Text style={styles.headerTitle}>SD</Text>
                 </View>
 
 
@@ -82,35 +79,26 @@ export default function LoginScreen() {
                 {/* Daftar Pilihan Materi */}
                 <View style={styles.cardListContainer}>
                     {levelEdu.map((item, index) => (
-                    <Link href={linkTarget[index]} asChild>
                         <View style={{ marginBottom: 20 }} key={item.id}>
                             <CardSubContent
                             title={item.title}
                             bgColor={
-                                    index === levelEdu.length - 2
-                                    ? '#27AE60'   // hijau
-                                    : index === levelEdu.length - 1
-                                    ? '#6E8CFB'   // biru
-                                    : '#FFFFFF'   // default putih
+                                    index === levelEdu.length - 2 ? '#27AE60' : index === levelEdu.length - 1 ? '#6E8CFB'  : '#FFFFFF'   
                                 } 
                             color={
-                                    index === levelEdu.length - 2
-                                    ? '#FFFFFF' 
-                                    : index === levelEdu.length - 1
-                                    ? '#FFFFFF'  
-                                    : '#27AE60'   // default putih
+                                    index === levelEdu.length - 2 ? '#FFFFFF' : index === levelEdu.length - 1 ? '#FFFFFF' : '#27AE60'
                                 } 
+                            route={
+                                    index === levelEdu.length - 2 ? '/mainContent/subMateri' : index === levelEdu.length - 1 ? '/mainContent/quiz' : item.route
+                                }  
                             />
                         </View>
-                    </Link>
                     ))}
                 </View>
 
                 {/* Navbar Bottom */}
                 <NavbarBottom
-                items={[
-                    { icon: require('../../../assets/icon/Home.png'), route: '../auth/login' },
-                ]}
+                    activeRoute={0}
                 />
 
             </View>

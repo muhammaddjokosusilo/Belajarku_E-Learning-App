@@ -1,88 +1,72 @@
-import React from 'react';
-import {
-  View,
-  Text,
-  Image,
-  Pressable,
-  StyleSheet,
-  ViewStyle,
-  TextStyle,
-  GestureResponderEvent,
-} from 'react-native';
-import { useRouter } from 'expo-router';
-
-type NavItem = {
-  label?: string;
-  icon?: string; // bisa nanti kamu ganti jadi komponen icon
-  route: string;
-};
+import { View, TouchableOpacity } from "react-native";
+import Ionicons from "@expo/vector-icons/Ionicons";
+import { useRouter } from "expo-router";
 
 type Props = {
-  items: NavItem[];
-  style?: ViewStyle | ViewStyle[];
-  textStyle?: TextStyle | TextStyle[];
-  activeRoute?: string;
+  activeRoute: number; // 1=Home, 2=Forum, 3=Library, 4=Profile
 };
 
-export default function NavbarBottom({ items, style, activeRoute }: Props) {
+export default function NavbarBottom({ activeRoute }: Props) {
   const router = useRouter();
 
   return (
-    <View style={[styles.navbar, style]}>
-      {items.map((item) => (
-        <Pressable
-          key={item.route}
-          onPress={() => router.push(item.route)}
-          style={({ pressed }) => [
-            styles.navItem,
-            pressed && styles.pressed,
-            activeRoute === item.route && styles.active,
-          ]}>
-          <View
-            style={[
-              styles.navImage,
-              activeRoute === item.route && styles.activeImage,
-            ]}>
-            <Image 
-                source={item.icon || require('../../assets/icon/Home.png')}
-            />
-          </View>
-        </Pressable>
-      ))}
+    <View
+      style={{
+        position: "absolute",
+        bottom: 0,
+        left: 0,
+        right: 0,
+        height: 60,
+        backgroundColor: "#fff",
+      }}
+    >
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "space-around",
+          paddingVertical: 12,
+          shadowColor: "rgba(62, 62, 100, 1)",
+          shadowOffset: { width: 0, height: -5 },
+          shadowOpacity: 0.3,
+        }}
+      >
+        {/* Home */}
+        <TouchableOpacity onPress={() => router.push("/Dashboard")}>
+          <Ionicons
+            name={activeRoute === 1 ? "home" : "home-outline"}
+            size={26}
+            color={activeRoute === 1 ? "#4CAF50" : "#999"}
+          />
+        </TouchableOpacity>
+
+        {/* Library */}
+        <TouchableOpacity onPress={() => router.push("/LIbrary")}>
+          <Ionicons
+            name={activeRoute === 2 ? "book" : "book-outline"}
+            size={26}
+            color={activeRoute === 2 ? "#4CAF50" : "#999"}
+          />
+        </TouchableOpacity>
+
+        {/* Forum */}
+        <TouchableOpacity onPress={() => router.push("/forum")}>
+          <Ionicons
+            name={activeRoute === 3 ? "chatbubble" : "chatbubble-outline"}
+            size={26}
+            color={activeRoute === 3 ? "#4CAF50" : "#999"}
+          />
+        </TouchableOpacity>
+
+
+        {/* Profile */}
+        <TouchableOpacity onPress={() => router.push("/Profile")}>
+          <Ionicons
+            name={activeRoute === 4 ? "person" : "person-outline"}
+            size={26}
+            color={activeRoute === 4 ? "#4CAF50" : "#999"}
+          />
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  navbar: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    height: 70,
-    backgroundColor: '#fff',
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    elevation: 10,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: -2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 6,
-  },
-  navItem: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: 6,
-    paddingHorizontal: 12,
-    borderRadius: 10,
-  },
-  pressed: {
-    opacity: 0.8,
-    transform: [{ scale: 0.97 }],
-  },
-  active: {
-    backgroundColor: '#06ec8122',
-  },
-
-});

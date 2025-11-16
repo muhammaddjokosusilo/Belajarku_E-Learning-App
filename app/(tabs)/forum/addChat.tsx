@@ -10,12 +10,12 @@ import {
   Dimensions,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
+import { useRouter } from "expo-router";
 const { width } = Dimensions.get('window');
 import NavbarBottom from '@/components/ui/navbar_bottom';
 
 export default function AddChatScreen() {
-  const navigation = useNavigation();
+  const router = useRouter();
 
   const [subject, setSubject] = useState("");
   const [textValue, setTextValue] = useState("");
@@ -27,10 +27,10 @@ export default function AddChatScreen() {
 
         {/* Header */}
         <View style={styles.header}>
-            <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
-                <Ionicons name="arrow-back" size={22} color="#fff" />
+            <TouchableOpacity onPress={() => router.push("/forum")} style={styles.backButton}>
+              <Ionicons name="arrow-back" size={22} color="#fff" />
             </TouchableOpacity>
-            <Text style={styles.headerTitle}>Forum</Text>
+            <Text style={styles.headerTitle}>Add Chat</Text>
         </View>
 
         {/* Form Box */}
@@ -88,9 +88,7 @@ export default function AddChatScreen() {
         </Modal>
         {/* Navbar Bottom */}
         <NavbarBottom
-            items={[
-            { icon: require('../../../assets/icon/Home.png'), route: '../auth/login' },
-            ]}
+            activeRoute={2}
         />
       </View>
     </SafeAreaView>

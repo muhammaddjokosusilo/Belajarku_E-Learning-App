@@ -1,22 +1,19 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   SafeAreaView,
   View,
   StyleSheet,
-  Image,
-  TextInput,
   Text, 
-  Dimensions,
   TouchableOpacity,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
+import { useRouter } from 'expo-router';
 import NavbarBottom from '@/components/ui/navbar_bottom';
 import CardMateri from '@/components/ui/CardLibrary';
 
 
 export default function LibraryScreen() {
-    const navigation = useNavigation();
+    const router = useRouter();
 
     const libraryItems = [
         { id: 1, title: 'Bangun Datar', subject: 'Matematika', color: '#FF5C5C', pdf: 'BangunDatar.pdf' },
@@ -29,10 +26,10 @@ export default function LibraryScreen() {
             <View style={styles.container}>
                 {/* Navigation Back */}
                 <View style={styles.header}>
-                    <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
-                    <Ionicons name="arrow-back" size={22} color="#fff" />
+                    <TouchableOpacity onPress={() => router.push("/Dashboard")} style={styles.backButton}>
+                      <Ionicons name="arrow-back" size={22} color="#fff" />
                     </TouchableOpacity>
-                    <Text style={styles.headerTitle}>My Library</Text>
+                    <Text style={styles.headerTitle}>Library</Text>
                 </View>
                 
                 {/* Navigation Back End */}
@@ -53,9 +50,7 @@ export default function LibraryScreen() {
 
                 {/* Navbar Bottom */}
                 <NavbarBottom
-                    items={[
-                        { icon: require('../../../assets/icon/Home.png'), route: '../auth/login' },
-                    ]}
+                    activeRoute={2}
                 />
                 {/* Navbar Bottom End */}
             </View>
