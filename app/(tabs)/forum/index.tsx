@@ -4,7 +4,6 @@ import {
   View,
   StyleSheet,
   Text, 
-  Dimensions,
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
@@ -12,17 +11,16 @@ import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 
 
-import NavbarBottom from '@/components/ui/navbar_bottom';
 import ForumPostCard from "@/components/forum/forumPostCard";
 import ReplyCard from '@/components/forum/replyCard';
 import ReplyInputBox from '@/components/forum/replyInputBox';
 
-const { width } = Dimensions.get('window');
+
 
 export default function ForumScreen() {
     const router = useRouter();
 
-    const forumData = [
+    const [forumData, setForumData] = useState([
         {
         id: 1,
         type: "question",
@@ -61,7 +59,7 @@ export default function ForumScreen() {
         content: "Balasan dari pertanyaan kedua.",
         date: "3 September 2045",
         },
-    ] as const;
+    ]);
 
     // membuka/menutup balasan
     const [openReplies, setOpenReplies] = useState<{ [key: number]: boolean }>({});
@@ -77,19 +75,21 @@ export default function ForumScreen() {
     };
 
     const addReply = (questionId: number) => {
-        if (!replyText[questionId]) return;
+    if (!replyText[questionId]) return;
 
-        forumData.push({
-            id: forumData.length + 1,
-            type: "reply",
-            parentId: questionId,
-            user: "Anonymous",
-            content: replyText[questionId],
-            date: "Today"
-        });
+    setForumData(prev => [
+        ...prev,
+        {
+        id: prev.length + 1,
+        type: "reply",
+        parentId: questionId,
+        user: "Anonymous",
+        content: replyText[questionId],
+        date: "Today",
+        }
+    ]);
 
-        // kosongkan input
-        setReplyText((prev) => ({ ...prev, [questionId]: "" }));
+    setReplyText(prev => ({ ...prev, [questionId]: "" }));
     };
 
     // ambil hanya pertanyaan
@@ -152,8 +152,6 @@ export default function ForumScreen() {
         </SafeAreaView>
     );
 }
-
-const CARD_WIDTH = Math.min(311, width - 40);
 
 const styles = StyleSheet.create({
     screen: {

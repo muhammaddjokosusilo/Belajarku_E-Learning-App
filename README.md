@@ -4,10 +4,16 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
 
 ## Get started
 
+0. Input Direktori
+
+   ```bash
+   cd Belajarku_E-Learning-App
+   ```
+
 1. Install dependencies
 
    ```bash
-   npm install
+   npm install expo
    ```
 
 2. Start the app

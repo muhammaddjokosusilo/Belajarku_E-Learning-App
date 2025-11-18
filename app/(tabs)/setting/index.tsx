@@ -1,19 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   SafeAreaView,
   View,
   StyleSheet,
-  Image,
-  Modal,
   Text, 
-  Dimensions,
   TouchableOpacity,
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 
-
-const { width } = Dimensions.get('window');
 
 export default function ProfileScreen() {
     const router = useRouter();
@@ -29,15 +24,22 @@ export default function ProfileScreen() {
                     </View>
 
                     {/* Content */}
-                    <View style={{ marginTop: 10, backgroundColor: '#000', width: '90%', height: '50%', color: '#fff',  }}>
-                        <View style={{ backgroundColor: '#0ff', width: '30%', height: '30%' }}>
-
+                    <View style={{ marginTop: 10, backgroundColor: '#D9D9D9', width: '90%', height: '50%'}}>
+                        <View style={styles.conButton}>
+                            <TouchableOpacity onPress={() => router.push("/setting")} style={styles.button}>
+                                <Text style={{ fontWeight: 'bold' }}>Ganti Tema</Text>
+                            </TouchableOpacity>
                         </View>
-                        <View style={{ backgroundColor: '#0ff', width: '30%', height: '30%' }}>
-
+                        <View style={styles.conButton}>
+                            <TouchableOpacity onPress={() => router.push("/setting")} style={styles.button}>
+                                <Text style={{ fontWeight: 'bold' }}>Bahasa Aplikasi</Text>
+                            </TouchableOpacity>
                         </View>
-                        <View style={{ backgroundColor: '#0ff', width: '30%', height: '30%' }}>
-
+                        <View style={styles.conButton}>
+                            <TouchableOpacity onPress={() => router.push("/setting")} style={styles.button}>
+                                <Text style={{ fontWeight: 'bold' }}>Tentang Aplikasi</Text>  
+                            </TouchableOpacity>
+                            
                         </View>
                     </View>
                 </View>
@@ -94,5 +96,28 @@ const styles = StyleSheet.create({
         fontSize: 24,
         fontWeight: 'bold',
         color: 'white',
+    },
+
+    // Button Content
+    conButton: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+
+    button: {
+        width: '65%',
+        backgroundColor: '#FAFAFA',
+        height: '30%',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 20,
+        // iOS Shadow Properties
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 0 },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        // Android Elevation
+        elevation: 5,
     },
 })

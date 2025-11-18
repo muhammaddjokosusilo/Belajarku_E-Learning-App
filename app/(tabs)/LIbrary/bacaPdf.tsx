@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { cache } from 'react';
 import {
   SafeAreaView,
   View,
@@ -7,76 +7,40 @@ import {
   Dimensions,
   TouchableOpacity,
 } from 'react-native';
-const { width } = Dimensions.get('window');
-import NavbarBottom from '@/components/ui/navbar_bottom';
-import { useNavigation } from '@react-navigation/native';
-import { WebView } from "react-native-webview";
+import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-import * as FileSystem from "expo-file-system";
+import Pdf from 'react-native-pdf';
 
-// const pdfList = [
-//   {
-//     id: 1,
-//     title: "Bangun Datar",
-//     file: require("../../../assets/pdf/bangunDatarPDF.pdf"),
-//   },
-// ] as const;
-
-// Fungsi convert require → uri
-// async function loadPdf(requireFile: any) {
-//   const fileName = "local_pdf.pdf";
-//   const target = FileSystem.cacheDirectory + fileName;
-
-//   await FileSystem.copyAsync({
-//     from: requireFile,
-//     to: target,
-//   });
-
-//   return target;
-// }
 
 export default function TemplateScreen() {
-    const navigation = useNavigation();
-    const [pdfUri, setPdfUri] = useState<string | null>(null);
-
-    // ambil PDF pertama dari array
-    // useEffect(() => {
-    //     (async () => {
-    //     const uri = await loadPdf(pdfList[0].file);
-    //     setPdfUri(uri);
-    //     })();
-    // }, []);
-
+    const router = useRouter();
+    const pdfResource = { uri: 'https://smpnegeri3jakarta.sch.id/wp-content/uploads/2022/07/BAB-6-BANGUN-RUANG.pdf', cache: 'true'}
     return (
         <SafeAreaView style={styles.screen}>
             <View style={styles.container}>
 
                 {/* Header Back */}
                 <View style={styles.header}>
-                    <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
-                    <Ionicons name="arrow-back" size={22} color="#fff" />
+                    <TouchableOpacity onPress={() => router.push("/Dashboard")} style={styles.backButton}>
+                        <Ionicons name="arrow-back" size={22} color="#fff" />
                     </TouchableOpacity>
                     <Text style={styles.headerTitle}>Bangun Ruang</Text>
                 </View>
 
-                {/* * <View style={styles.pdfScreen}> */}
-
-                    {/* PDF VIEWER */}
-                    {/* <View style={styles.pdfContainer}> */}
-                        {/* {pdfUri && ( */}
-                        {/* <WebView source={{ uri: pdfUri }} style={styles.webview} /> */}
-                        {/* )} */}
-                    {/* </View> */}
-
-                {/* </View> */} 
-
-                {/* Navbar Bottom */}
+                <View style={{ flex: 1 }}>
+                    <Pdf
+                        trustAllCerts={false}
+                        source={pdfResource}
+                        style={styles.pdf}
+                        onLoadComplete={(numberOfPages, filePath) => {
+                            console.log('number of pages: ${numberOfPages}');
+                        }}
+                    />
+                </View>
             </View>
         </SafeAreaView>
     );
 }
-
-const CARD_WIDTH = Math.min(311, width - 40);
 
 const styles = StyleSheet.create({
   screen: {
@@ -103,7 +67,6 @@ const styles = StyleSheet.create({
     // elevation (Android)
     elevation: 8,
   },
-  
   //   header
     header: {
         flexDirection: 'row',
@@ -127,20 +90,9 @@ const styles = StyleSheet.create({
         color: 'white',
     },
 
-    pdfScreen: {
+    pdf: {
         flex: 1,
-        backgroundColor: "#27AE60",
-        paddingTop: 40,
-        alignItems: "center",
-    },
-    pdfContainer: {
-        width: "85%",
-        height: "85%",
-        borderRadius: 15,
-        overflow: "hidden",
-        backgroundColor: "white",
-    },
-    webview: {
-        flex: 1,
-    },
+        width: Dimensions.get('window').width,
+        height: Dimensions.get('window').height,
+    }
 });
