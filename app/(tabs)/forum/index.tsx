@@ -118,6 +118,7 @@ export default function ForumScreen() {
                             <ForumPostCard
                                 item={q}
                                 onPressReply={() => toggleReplies(q.id)}
+                                isReplyOpen={openReplies[q.id] === true}
                             />
 
                             {openReplies[q.id] && (

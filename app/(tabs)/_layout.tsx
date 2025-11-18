@@ -57,7 +57,6 @@ export default function TabLayout() {
       {/* Tab yang tidak perlu ditampilkan */}
       <Tabs.Screen name="explore" options={{ href: null }} />
       <Tabs.Screen name="forum/addChat" options={{ href: null }} />
-      <Tabs.Screen name="LIbrary/bacaPdf" options={{ href: null }} />
       <Tabs.Screen name="mainContent/isiMateri" options={{ href: null }} />
       <Tabs.Screen name="mainContent/levelEdu" options={{ href: null }} />
       <Tabs.Screen name="mainContent/materiSD" options={{ href: null }} />

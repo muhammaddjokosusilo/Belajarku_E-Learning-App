@@ -1,8 +1,10 @@
 // components/forum/ForumPostCard.tsx
-import React from "react";
+import { Ionicons } from "@expo/vector-icons";
+import React, { useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 
-export default function ForumPostCard({ item, onPressReply }: any) {
+export default function ForumPostCard({ item, isReplyOpen, onPressReply }: any) {
+  const [liked, setLiked] = useState(false);
   return (
     <View style={styles.card}>
       {/* Header */}
@@ -27,16 +29,22 @@ export default function ForumPostCard({ item, onPressReply }: any) {
       {/* Icons */}
       <View style={styles.iconRow}>
         {/* icon like */}
-        <TouchableOpacity>
-          <Image
-            source={require('@/assets/icon/Home.png')}
-            style={styles.icon}
+        <TouchableOpacity
+          onPress={() => {
+            setLiked(!liked);    // ini mengubah icon
+          }}
+        >
+          <Ionicons
+            name={liked ? "heart" : "heart-outline"}
+            size={20}
+            color={liked ? "green" : "black"}
           />
         </TouchableOpacity>
         <TouchableOpacity onPress={onPressReply}>
-          <Image
-            source={require('@/assets/icon/Home.png')}
-            style={styles.icon}
+          <Ionicons
+            name={isReplyOpen ? "chatbox" : "chatbox-outline"}
+            size={20}
+            color={isReplyOpen ? "green" : "black"}
           />
         </TouchableOpacity>
       </View>

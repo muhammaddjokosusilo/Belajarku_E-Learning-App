@@ -73,7 +73,7 @@ export default function AddChatScreen() {
               <Ionicons name="chatbox" size={40} color="#27AE60" />
               <Text style={styles.modalTitle}>Kirim Percakapan?</Text>
 
-              <TouchableOpacity style={styles.modalSend}>
+              <TouchableOpacity style={styles.modalSend}  onPress={() =>{ setShowConfirm(false); router.replace("/forum"); }} >
                 <Text style={styles.modalSendText}>Kirim</Text>
               </TouchableOpacity>
 
