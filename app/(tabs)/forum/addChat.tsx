@@ -87,9 +87,6 @@ export default function AddChatScreen() {
           </View>
         </Modal>
         {/* Navbar Bottom */}
-        <NavbarBottom
-            activeRoute={2}
-        />
       </View>
     </SafeAreaView>
   );

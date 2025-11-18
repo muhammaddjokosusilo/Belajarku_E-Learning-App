@@ -72,10 +72,6 @@ export default function MathematicsScreen() {
                     </View>
                     ))}
                 </View>
-                
-                <NavbarBottom
-                    activeRoute={0}
-                />
                
             </View>
         </SafeAreaView>

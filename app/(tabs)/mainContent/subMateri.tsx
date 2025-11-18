@@ -96,11 +96,6 @@ export default function LoginScreen() {
                     ))}
                 </View>
 
-                {/* Navbar Bottom */}
-                <NavbarBottom
-                    activeRoute={0}
-                />
-
             </View>
         </SafeAreaView>
     );

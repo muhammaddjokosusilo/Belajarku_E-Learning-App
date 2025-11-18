@@ -71,11 +71,6 @@ export default function TemplateScreen() {
                 {/* </View> */} 
 
                 {/* Navbar Bottom */}
-                <NavbarBottom
-                items={[
-                    { icon: require('../../../assets/icon/Home.png'), route: '../auth/login' },
-                ]}
-                />
             </View>
         </SafeAreaView>
     );

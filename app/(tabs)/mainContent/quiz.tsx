@@ -73,10 +73,6 @@ return (
 
                 </ScrollView>
 
-            {/* Navbar Bottom */}
-            <NavbarBottom
-                activeRoute={0}
-            />
         </View>
     </SafeAreaView>
   );

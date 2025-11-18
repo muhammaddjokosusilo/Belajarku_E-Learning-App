@@ -93,10 +93,6 @@ export default function DashboardScreen() {
               </View>
 
             {/* Info section End */}
-            {/* Bottom Navbar */}
-            <NavbarBottom
-              activeRoute={1}
-            />
         </View>
     </SafeAreaView>
   );

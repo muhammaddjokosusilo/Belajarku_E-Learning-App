@@ -148,9 +148,6 @@ export default function ForumScreen() {
                     <Ionicons name="add-outline" size={30} color={'#27AE60'} />
                 </TouchableOpacity>
                 {/* Navbar Bottom */}
-                <NavbarBottom
-                    activeRoute={3}
-                />
             </View>
         </SafeAreaView>
     );

@@ -10,7 +10,6 @@ import {
 const { width } = Dimensions.get('window');
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
-import NavbarBottom from '@/components/ui/navbar_bottom';
 
 export default function TemplateScreen() {
     const router = useRouter();
@@ -44,11 +43,6 @@ return (
                     </View>
                 </View>
             </View>
-
-            {/* Navbar Bottom */}
-            <NavbarBottom
-                activeRoute={0}
-            />
         </View>
     </SafeAreaView>
   );

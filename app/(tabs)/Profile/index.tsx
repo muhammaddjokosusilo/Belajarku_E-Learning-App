@@ -4,14 +4,13 @@ import {
   View,
   StyleSheet,
   Image,
-  TextInput,
   Modal,
   Text, 
   Dimensions,
   TouchableOpacity,
 } from 'react-native';
-import NavbarBottom from '@/components/ui/navbar_bottom';
 import { useRouter } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons';
 import Button from '@/components/ui/Button';
 
 const { width } = Dimensions.get('window');
@@ -28,6 +27,13 @@ export default function ProfileScreen() {
     return (
         <SafeAreaView style={styles.screen}>
             <View style={styles.container}>
+                {/* Header dengan tombol kembali dan judul */}
+                <View style={styles.header}>
+                    <TouchableOpacity onPress={() => router.push("/Dashboard")} style={styles.backButton}>
+                    <Ionicons name="arrow-back" size={22} color="#fff" />
+                    </TouchableOpacity>
+                    <Text style={styles.headerTitle}>Level Education</Text>
+                </View>
 
                 {/* Card Name */}
                 <View style={styles.cardProfile}>
@@ -42,7 +48,7 @@ export default function ProfileScreen() {
                 {/* Content */}
 
                 <View style={styles.ConContent}>
-                    <View style={{marginLeft: 20, marginTop: 50}}>
+                    <View style={{ width: '100%' }}>
 
                         {/* Profile */}
                         <Text style={{ fontWeight: '700', opacity: 0.5 }}>Profile</Text>
@@ -62,9 +68,9 @@ export default function ProfileScreen() {
                             <View style={{ marginTop: 10 }}>                      
                                 <Text
                                     style={{ fontWeight: '700', color: '#27AE60', marginBottom: 10 }}
-                                    onPress={() => router.push('/')}
+                                    onPress={() => router.push('/setting')}
                                 >
-                                Edit Profil
+                                Pengaturan
                                 </Text>
                                 
                                 <Text
@@ -116,12 +122,6 @@ export default function ProfileScreen() {
                 </View>
 
                 {/* Content End */}
-
-                {/* Navbar Bottom */}
-                <NavbarBottom
-                    activeRoute={4}
-                />
-                {/* Navbar Bottom End */}
             </View>
         </SafeAreaView>
     );
@@ -140,9 +140,9 @@ const styles = StyleSheet.create({
     height: 874,
     backgroundColor: '#27AE60',
     borderRadius: 20,
-    alignItems: 'center',
-    justifyContent: 'center',
-    
+    alignItems: 'center', 
+    paddingTop: 50, // Ruang untuk status bar/header
+    paddingHorizontal: 20,
 
     // shadow (iOS)
     shadowColor: '#000',
@@ -153,11 +153,34 @@ const styles = StyleSheet.create({
     elevation: 8,
   },
 
+  // --- Gaya Header ---
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 10,
+    marginBottom: 30, // Jarak antara header dan kartu
+    width: '100%',
+  },
+  backButton: {
+    padding: 5,
+    marginRight: 20,
+  },
+  backIcon: {
+    fontSize: 30,
+    color: 'white',
+    fontWeight: 'bold',
+  },
+  headerTitle: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: 'white',
+  },
+
+  // Card Style
   cardProfile: {
     width: 336,
     height: 86,
-    position: 'absolute',
-    top: 86,
+    marginVertical: 30,
     backgroundColor: '#fff',
     borderRadius: 50,
     flexDirection: 'row',
@@ -174,17 +197,20 @@ const styles = StyleSheet.create({
     width: 200,
   },
 
+  // Content Profile
   ConContent: {
     width: 336,
     height: 378,
     borderRadius: 20,
     backgroundColor: '#fff',
+    alignItems: 'flex-start',
+    padding: 30,
   },
   textBio: {
     marginLeft: 20,
   },
 
-    // Modal Style
+  // Modal Style
   overlay: {
     flex: 1,
     backgroundColor: 'rgba(0,0,0,0.4)', // transparan gelap

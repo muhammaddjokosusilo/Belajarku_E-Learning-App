@@ -47,11 +47,6 @@ export default function LibraryScreen() {
                     </View>
                   ))}
                 </View>
-
-                {/* Navbar Bottom */}
-                <NavbarBottom
-                    activeRoute={2}
-                />
                 {/* Navbar Bottom End */}
             </View>
         </SafeAreaView>
