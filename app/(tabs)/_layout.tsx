@@ -8,14 +8,13 @@ export default function TabLayout() {
 
   return (
     <Tabs
-      // 
       screenOptions={({ route }) => ({
         tabBarActiveTintColor: "green",
         tabBarInactiveTintColor: "#999",
         headerShown: false,
         tabBarButton: HapticTab,
         tabBarStyle:
-          route.name === "auth/login" || route.name === "auth/forgot" || route.name === "auth/newPassword" || route.name === "auth/register"
+          route.name === "index" || route.name === "auth/forgot" || route.name === "auth/newPassword" || route.name === "auth/register"
             ? { display: "none" } : { backgroundColor: "#fff" },
         })}>
       {/* ini jangan di hapus dahulu untuk navigasi */}
@@ -62,11 +61,12 @@ export default function TabLayout() {
       <Tabs.Screen name="mainContent/materiSD" options={{ href: null }} />
       <Tabs.Screen name="mainContent/quiz" options={{ href: null }} />
       <Tabs.Screen name="mainContent/subMateri" options={{ href: null }} />
-      <Tabs.Screen name="auth/login" options={{ href: null }} />
       <Tabs.Screen name="auth/register" options={{ href: null }} />
       <Tabs.Screen name="auth/forgot" options={{ href: null }} />
       <Tabs.Screen name="auth/newPassword" options={{ href: null }} />
       <Tabs.Screen name="template/index" options={{ href: null }} />
+      <Tabs.Screen name="LIbrary/bacaPdf" options={{ href: null }} />
+      <Tabs.Screen name="setting/index" options={{ href: null }} />
     </Tabs>
   );
 }

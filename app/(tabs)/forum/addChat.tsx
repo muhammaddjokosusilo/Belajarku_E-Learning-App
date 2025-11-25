@@ -95,7 +95,7 @@ export default function AddChatScreen() {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    backgroundColor: '#f2f2f2',
+    backgroundColor: '#27AE60',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -109,13 +109,13 @@ const styles = StyleSheet.create({
     paddingTop: 50, // Ruang untuk status bar/header
     paddingHorizontal: 20,
 
-    // shadow (iOS)
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 0.12,
-    shadowRadius: 12,
-    // elevation (Android)
-    elevation: 8,
+    // // shadow (iOS)
+    // shadowColor: '#000',
+    // shadowOffset: { width: 0, height: 8 },
+    // shadowOpacity: 0.12,
+    // shadowRadius: 12,
+    // // elevation (Android)
+    // elevation: 8,
   },
 
 //   header

@@ -1,133 +1,182 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
+// ...existing code...
+import React, { useState } from 'react';
+import {
+  SafeAreaView,
+  View,
+  StyleSheet,
+  Image,
+  TextInput,
+  Text, 
+  Dimensions,
+} from 'react-native';
 import { useRouter } from 'expo-router';
-
-import Button from '@/components/ui/Button';
-import { HelloWave } from '@/components/hello-wave';
-import ParallaxScrollView from '@/components/parallax-scroll-view';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
 import { Link } from 'expo-router';
+import Button from '@/components/ui/Button';
 
-export default function HomeScreen() {
+const { width } = Dimensions.get('window');
+
+export default function LoginScreen() {
+    const router = useRouter();
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12',
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <Link href="/modal">
-          <Link.Trigger>
-            <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-          </Link.Trigger>
-          <Link.Preview />
-          <Link.Menu>
-            <Link.MenuAction title="Action" icon="cube" onPress={() => alert('Action pressed')} />
-            <Link.MenuAction
-              title="Share"
-              icon="square.and.arrow.up"
-              onPress={() => alert('Share pressed')}
+    <SafeAreaView style={styles.screen}>
+        <View style={styles.container}>
+          <View style={styles.ConMain}>
+            {/* Logo */}
+            <View style={styles.header}>
+            <Image
+                source={require('@/assets/images/logo.png')}
+                style={styles.logo}
+                resizeMode="contain"
             />
-            <Link.Menu title="More" icon="ellipsis">
-              <Link.MenuAction
-                title="Delete"
-                icon="trash"
-                destructive
-                onPress={() => alert('Delete pressed')}
-              />
-            </Link.Menu>
-          </Link.Menu>
-        </Link>
+            </View>
 
-        <ThemedText>
-          {`Tap the Explore tab to learn more about what's included in this starter app.`}
-        </ThemedText>
-      </ThemedView>
+            {/* Login Form */}
+            <View style={styles.cardWrapper}>
+                <View style={styles.card}>
+                    {/* Input Field */}
+                    <View style={styles.inputContainer}>
+                        <TextInput
+                            style={styles.input}
+                            placeholder="Username"
+                            placeholderTextColor="#9E9E9E"
+                            value={username}
+                            onChangeText={setUsername}
+                            autoCapitalize="none"
+                        />
+                        <TextInput
+                            style={styles.input}
+                            placeholder="Password"
+                            placeholderTextColor="#9E9E9E"
+                            value={password}
+                            onChangeText={setPassword}
+                            secureTextEntry
+                        />
+                        <Text
+                          style={styles.registerLink}
+                          onPress={() => router.push('/auth/forgot')}
+                        >
+                          Forget your Password?
+                        </Text>
+                    </View>
+                    {/* Input Field End */}
 
-      {/* Tombol untuk ke explore */}
-      <ThemedView style={styles.stepContainer}>
-        <Link href="/explore" style={styles.exploreLink}>
-          <Link.Trigger>
-            <ThemedText type="subtitle" style={styles.exploreButton}>
-              Buka Explore
-            </ThemedText>
-          </Link.Trigger>
-          <Link.Preview />
-        </Link>
-      </ThemedView>
+                    {/* Button Login */}
+                    <View style={styles.button}>
+                      <Link href="/Dashboard" asChild>
+                        <Button title="Login" style={{ alignSelf: 'flex-start' }} />
+                      </Link>
+                    </View>
+                    {/* Button Login End */}
 
-      {/* Button Login */}
-      <ThemedView style={styles.stepContainer}>
-        <Link href="/auth/login" asChild>
-          <Button title="Ke Login" style={{ alignSelf: 'flex-start' }} />
-        </Link>
-      </ThemedView>
-
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          {`When you're ready, run `}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+                    {/* Register */}
+                    <View style={styles.registerContainer}>
+                     <Text style={styles.registerText}>Don't have an account?</Text>                      
+                     <Text
+                        style={styles.registerLink}
+                        onPress={() => router.push('/auth/register')}
+                      >
+                          REGISTER
+                      </Text>
+                    </View>
+                    {/* Register End */}
+                </View>
+            </View>
+          </View>  
+        </View>
+    </SafeAreaView>
   );
 }
 
+const CARD_WIDTH = Math.min(311, width - 40);
+
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
+  screen: {
+    flex: 1,
+    backgroundColor: '#27AE60',
     alignItems: 'center',
-    gap: 8,
+    justifyContent: 'center',
   },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
+  container: {
+    width: 402,
+    height: 874,
+    backgroundColor: '#27AE60',
+    borderRadius: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+
+    // shadow (iOS)
+    // shadowColor: '#000',
+    // shadowOffset: { width: 0, height: 8 },
+    // shadowOpacity: 0.12,
+    // shadowRadius: 12,
+    // elevation (Android)
+    // elevation: 8,
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+  ConMain: {
+    width: 344,
+    height: 544,
   },
-  exploreButton: {
-    backgroundColor: '#007bff',
-    color: '#fff',
-    paddingVertical: 10,
-    paddingHorizontal: 14,
-    borderRadius: 8,
-    overflow: 'hidden',
-    alignSelf: 'flex-start',
+  header: {
+    height: 150,
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    paddingBottom: 12,
   },
-  exploreLink: {
-    alignSelf: 'flex-start', // mencegah link mengisi lebar parent
-    // width: 'auto' // opsional
+  logo: {
+    width: 311,
+    height: '100%',
+  },
+  cardWrapper: {
+    alignItems: 'center',
+    marginTop: 0,
+  },
+  card: {
+    width: CARD_WIDTH,
+    height: 411,
+    backgroundColor: '#fff',
+    borderRadius: 40,
+    paddingVertical: 28,
+    paddingHorizontal: 0,
+    // shadow
+    elevation: 8,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.12,
+    shadowRadius: 12,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  inputContainer: {
+    width: 245,
+    marginTop: 18,
+    gap: 12,
+  },
+  input: {
+    backgroundColor: '#D9D9D9',
+    height: 44,
+    borderRadius: 22,
+    paddingHorizontal: 16,
+    color: '#747474',
+    fontSize: 20,
+  }, 
+  button: {
+    marginTop: 40,
+  },   
+  registerContainer: {
+    marginTop: 30,
+    alignItems: 'center',
+  },
+  registerText: {
+    color: '#666',
+    marginBottom: 6,
+    fontSize: 12,
+  },
+  registerLink: {
+    color: '#19A463',
+    fontWeight: '700',
+    fontSize: 14,
   },
 });

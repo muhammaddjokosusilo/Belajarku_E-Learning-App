@@ -21,7 +21,7 @@ export default function ProfileScreen() {
 
     const handleLogout = () => {
         setVisible(false);
-        router.push('/(tabs)/auth/login'); // ganti sesuai halaman login kamu
+        router.push('../');
     };
 
     return (
@@ -144,13 +144,13 @@ const styles = StyleSheet.create({
     paddingTop: 50, // Ruang untuk status bar/header
     paddingHorizontal: 20,
 
-    // shadow (iOS)
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 0.12,
-    shadowRadius: 12,
-    // elevation (Android)
-    elevation: 8,
+    // // shadow (iOS)
+    // shadowColor: '#000',
+    // shadowOffset: { width: 0, height: 8 },
+    // shadowOpacity: 0.12,
+    // shadowRadius: 12,
+    // // elevation (Android)
+    // elevation: 8,
   },
 
   // --- Gaya Header ---

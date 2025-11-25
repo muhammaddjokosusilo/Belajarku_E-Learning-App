@@ -61,7 +61,7 @@ export default function LoginScreen() {
                      <Text style={styles.registerText}>Have an account?</Text>                      
                      <Text
                         style={styles.registerLink}
-                        onPress={() => router.push('/auth/login')}
+                        onPress={() => router.push('../')}
                       >
                         LOGIN
                       </Text>
@@ -80,7 +80,7 @@ const CARD_WIDTH = Math.min(311, width - 40);
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    backgroundColor: '#f2f2f2',
+    backgroundColor: '#27AE60',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -92,13 +92,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
 
-    // shadow (iOS)
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 0.12,
-    shadowRadius: 12,
-    // elevation (Android)
-    elevation: 8,
+    // // shadow (iOS)
+    // shadowColor: '#000',
+    // shadowOffset: { width: 0, height: 8 },
+    // shadowOpacity: 0.12,
+    // shadowRadius: 12,
+    // // elevation (Android)
+    // elevation: 8,
   },
   ConMain: {
     width: 344,

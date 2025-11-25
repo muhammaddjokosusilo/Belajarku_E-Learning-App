@@ -8,7 +8,6 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
-import NavbarBottom from '@/components/ui/navbar_bottom';
 import CardMateri from '@/components/ui/CardLibrary';
 
 
@@ -24,10 +23,10 @@ export default function LibraryScreen() {
     return (
         <SafeAreaView style={styles.screen}>
             <View style={styles.container}>
-                {/* Navigation Back */}
+                {/* Header Back */}
                 <View style={styles.header}>
                     <TouchableOpacity onPress={() => router.push("/Dashboard")} style={styles.backButton}>
-                      <Ionicons name="arrow-back" size={22} color="#fff" />
+                        <Ionicons name="arrow-back" size={22} color="#fff" />
                     </TouchableOpacity>
                     <Text style={styles.headerTitle}>Library</Text>
                 </View>
@@ -42,7 +41,7 @@ export default function LibraryScreen() {
                         titleCard={item.title}
                         subject={item.subject}
                         color={item.color}
-                        onPress={() => console.log('Buka PDF clicked')}
+                        onPress={() => router.push("/LIbrary/bacaPdf")}
                       />
                     </View>
                   ))}
@@ -56,39 +55,49 @@ export default function LibraryScreen() {
 
 const styles = StyleSheet.create({
   screen: {
-    flex: 1,
-    backgroundColor: '#f2f2f2',
-    alignItems: 'center',
-    justifyContent: 'center',
+      flex: 1,
+      backgroundColor: '#27AE60',
+      alignItems: 'center',
+      justifyContent: 'center',
   },
   container: {
-    width: 402,
-    height: 874,
-    backgroundColor: '#27AE60',
-    borderRadius: 20,
-    alignItems: 'center',
+      width: 402,
+      height: 874,
+      backgroundColor: '#27AE60',
+      borderRadius: 20,
+      alignItems: 'center', 
+      justifyContent: 'flex-start',
+      paddingTop: 50, // Ruang untuk status bar/header
+      paddingHorizontal: 20,
 
-    // shadow (iOS)
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 0.12,
-    shadowRadius: 12,
-    // elevation (Android)
-    elevation: 8,
+    //   // shadow (iOS)
+    //   shadowColor: '#000',
+    //   shadowOffset: { width: 0, height: 8 },
+    //   shadowOpacity: 0.12,
+    //   shadowRadius: 12,
+    //   // elevation (Android)
+    //   elevation: 8,
   },
+
   header: {
-    width: '100%',
-    flexDirection: 'row',
-    marginTop: 64,
-    paddingHorizontal: 20,
-    
+      flexDirection: 'row',
+      alignItems: 'center',
+      paddingHorizontal: 10,
+      marginBottom: 30, // Jarak antara header dan kartu
+      width: '100%',
   },
   backButton: {
-    marginRight: 10,
+      padding: 5,
+      marginRight: 20,
+  },
+  backIcon: {
+      fontSize: 30,
+      color: 'white',
+      fontWeight: 'bold',
   },
   headerTitle: {
-    fontSize: 20,
-    color: '#fff',
-    fontWeight: '700',
+      fontSize: 24,
+      fontWeight: 'bold',
+      color: 'white',
   },
 });
